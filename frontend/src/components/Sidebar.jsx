@@ -6,12 +6,12 @@ import { MdExplore } from "react-icons/md";
 import { PiSignInBold } from "react-icons/pi";
 import Logout from './Logout.jsx'
 const Sidebar = () => {
-  const authUser = false;
+  const authUser = true;
   return (
     <div>
       <aside
-        className="flex flex-col items-center min-w-12 sm:w-16 sticky top-0 left-0 h-screen py-8 overflow-y-auto border-r 
-      backdrop-filter backdrop-blur-xl bg-opacity-10  border-gray-800 hover:bg-gray-600/10
+        className="flex flex-col items-center min-w-12 sm:w-16 sticky top-0 left-0 h-screen py-8 overflow-y-auto border-r border-gray-700 p-l-0.1
+      bg-clip-padding backdrop-filter backdrop-blur-xl hover:bg-gray-600/10  text-white bg-opacity-10
 "
       >
         <nav className="h-full flex flex-col gap-3">
@@ -21,7 +21,7 @@ const Sidebar = () => {
 
           <Link
             to="/"
-            className="p-2 flex justify-center transition-colors duration-200 rounded-lg bg-glass  border border-gray-900 hover:bg-gray-900 hover:bg-glass"
+            className="p-2 flex justify-center transition-colors duration-200 rounded-lg   border border-gray-900 hover:bg-gray-900 "
           >
             <IoHome size={25} />
           </Link>
@@ -29,7 +29,7 @@ const Sidebar = () => {
           {authUser && (
             <Link
               to="/likes"
-              className="p-2 flex justify-center transition-colors duration-200 rounded-lg bg-glass  border border-gray-900 hover:bg-gray-900 hover:bg-glass"
+              className="p-2 flex justify-center transition-colors duration-200 rounded-lg   border border-gray-900 hover:bg-gray-900 "
             >
               <FaThumbsUp size={25} />
             </Link>
@@ -39,7 +39,7 @@ const Sidebar = () => {
             <Link
               to="/explore"
               className="p-2 flex justify-center transition-colors duration-200 rounded-lg
-              bg-glass  border border-gray-900 hover:bg-gray-900 hover:bg-glass"
+               border border-gray-900 hover:bg-gray-900 "
             >
               <MdExplore size={25} />{" "}
             </Link>
@@ -48,7 +48,7 @@ const Sidebar = () => {
           {!authUser && (
             <Link
               to="/login"
-              className="p-2 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-900 hover:bg-glass"
+              className="p-2 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-900 border border-gray-900 "
             >
               <PiSignInBold size={25} />
             </Link>
@@ -58,7 +58,7 @@ const Sidebar = () => {
           {!authUser && (
             <Link
               to="/signup"
-              className="p-2 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-900 hover:bg-glass"
+              className="p-2 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-900 border border-gray-900 "
             >
               <img src="/Signup1.svg" alt="" className="h-8" />
             </Link>

@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import ExplorePage from './pages/ExplorePage';
 import LikesPage from './pages/LikesPage'
 import Sidebar from './components/Sidebar'
+import './index.css'; // ✅ This is crucial!
 const App = () => {
   return (
    <div className='flex text-white'>
