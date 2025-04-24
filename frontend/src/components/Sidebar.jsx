@@ -15,8 +15,8 @@ const Sidebar = () => {
 "
       >
         <nav className="h-full flex flex-col gap-3">
-          <Link to="/" className="flex justify-center">
-            <img className="h-8" src="/github.svg" alt="Logo" />
+          <Link to="/" className="flex justify-center border border-gray-900 hover:bg-gray-900 rounded-lg">
+            <img className="h-10 p-1" src="/logo1.png" alt="Logo" />
           </Link>
 
           <Link
@@ -65,7 +65,7 @@ const Sidebar = () => {
           )}
          {/*  here is logout component  and the component when user is Login */}
          { authUser && (
-          <div className="flex flex-col gap-2 mt-auto">
+          <div className="flex flex-col gap-2 mt-auto ">
               <Logout/>
           </div>
          )
