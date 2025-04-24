@@ -1,9 +1,7 @@
 import express from 'express';
-
+import {getUserProfileAndRepos} from '../controllers/userController.js'
 const userRouter = express.Router();
 
-//all routes
-userRouter.get('/profile',(req,res)=>{
-    res.send("Here is your GitHub Profile");
-})
+//all routes    profile/:username
+userRouter.get('/profile/:username',getUserProfileAndRepos)
 export default userRouter

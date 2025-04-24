@@ -14,8 +14,10 @@ const exploreRepos = async(language)=>{
     const headers = {
       authorization:`token ${import.meta.env.VITE_GITHUB_API_KEY}`
     }
-const res = await axios.get(`https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc&per_page=20`,{headers});
-const repos = res.data;
+    const res = await axios.get(`http://localhost:5000/api/user/explore/${language}`)
+    const {repos} = await res.data;
+// const res = await axios.get(`https://api.github.com/search/repositories?q=language:${language}&sort=stars&order=desc&per_page=20`,{headers});
+// const repos = res.data;
 setSelectedLanguage(language);
 setRepos(repos.items);
  }catch(err){

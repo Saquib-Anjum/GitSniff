@@ -21,23 +21,25 @@ const HomePage = () => {
       }
       try {
         // Get user profile
-        const userRes = await axios.get(
-          `https://api.github.com/users/${username}`,{headers}
-        );
-        const userProfile = userRes.data;
+        // const userRes = await axios.get(
+        //   `https://api.github.com/users/${username}`,{headers}
+        // );
+        // const userProfile = userRes.data;
 
-        // Get user repos in a separate request
-        const reposRes = await axios.get(
-          `https://api.github.com/users/${username}/repos`
-        );
-        const repos = reposRes.data;
+        // // Get user repos in a separate request
+        // const reposRes = await axios.get(
+        //   `https://api.github.com/users/${username}/repos`
+        // );
+        // const repos = reposRes.data;
+        const res = await axios.get(`http://localhost:5000/api/user/profile/${username}`)
+
+        const {repos, userProfile} =await res.data
 
         // Sort repos by default (recent first)
         repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
         console.log("User profile:", userProfile);
-        console.log("Repos:", repos);
-
+        
         setRepos(repos);
         setUserProfile(userProfile);
 
