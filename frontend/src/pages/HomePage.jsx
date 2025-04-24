@@ -16,10 +16,13 @@ const HomePage = () => {
   const getUserProfileAndRepos = useCallback(
     async (username = "Saquib-Anjum") => {
       setLoading(true);
+      const headers = {
+        authorization:`token ${import.meta.env.VITE_GITHUB_API_KEY}`
+      }
       try {
         // Get user profile
         const userRes = await axios.get(
-          `https://api.github.com/users/${username}`
+          `https://api.github.com/users/${username}`,{headers}
         );
         const userProfile = userRes.data;
 
