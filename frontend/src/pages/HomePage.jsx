@@ -31,7 +31,7 @@ const HomePage = () => {
         //   `https://api.github.com/users/${username}/repos`
         // );
         // const repos = reposRes.data;
-        const res = await axios.get(`http://localhost:5000/api/user/profile/${username}`)
+        const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/user/profile/${username}`)
 
         const {repos, userProfile} =await res.data
 

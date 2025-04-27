@@ -29,7 +29,7 @@ likedBy:[
             required:true,
         },
         avatarUrl:{
-            type:string
+            type:String
         },
         likeDate:{
             type:Date,
