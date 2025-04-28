@@ -10,7 +10,8 @@ import './index.css'; // ✅ This is crucial!
 import {Toaster} from 'react-hot-toast'
 import {useAuthContext} from './context/authContext.jsx'
 const App = () => {
-  const {authUser} = useAuthContext();
+  const {authUser,loading} = useAuthContext();
+  if(loading) return null;
   console.log("authenticatedUser", authUser)
   return (
    <div className='flex text-white'>

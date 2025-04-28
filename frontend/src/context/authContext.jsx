@@ -14,6 +14,7 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const checkUserLoggedIn = async () => {
+      setLoading(true);
       try {
         const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/auth/check`, { withCredentials: true });
         const data = res.data;  // no need for await here on res.data
@@ -29,7 +30,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <authContext.Provider value={{ authUser, setAuthUser, loading }}>
+    <authContext.Provider value={{ authUser, setAuthUser, loading ,setLoading}}>
       {children}
     </authContext.Provider>
   );

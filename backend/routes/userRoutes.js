@@ -4,4 +4,5 @@ const userRouter = express.Router();
 
 //all routes    profile/:username
 userRouter.get('/profile/:username',getUserProfileAndRepos)
+
 export default userRouter
