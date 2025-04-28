@@ -1,4 +1,6 @@
 import passport from 'passport';
+import userModel from '../models/userModel.js'
+import mongoose from 'mongoose'
 import dotenv from 'dotenv';
 dotenv.config();
 import { Strategy as GitHubStrategy } from 'passport-github2'
@@ -24,17 +26,38 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:5000/api/auth/github/callback"
+    callbackURL: `/api/auth/github/callback`
   },
-  function(accessToken, refreshToken, profile, done) {
+  async function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
-    process.nextTick(function () {
-      
-      // To keep the example simple, the user's GitHub profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the GitHub account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
+//console.log(profile);
+try {
+  //console.log('GitHub Profile:', profile);  // ✅ Check profile
+
+  const user = await userModel.findOne({ username: profile.username });
+  if (!user) {
+    console.log('New user, saving to DB...');  // ✅ See if new user
+
+    const newUser = new userModel({
+      username: profile.username,
+      name: profile.displayName,
+      profileUrl: profile.profileUrl, 
+      avatarUrl: profile.photos[0].value,
+      likedProfiles: [],
+      likedBy: []
     });
+
+    await newUser.save();  // ✅ Save new user
+    console.log('User saved successfully!');  // ✅ Confirm saved
+
+    done(null, newUser);
+  } else {
+    console.log('User already exists.');
+    done(null, user);
+  }
+} catch (err) {
+  console.error('Error in GitHub Strategy:', err);  // ✅ Catch any error
+  done(err, null);
+}
   }
 ));

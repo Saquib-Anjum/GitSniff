@@ -11,24 +11,39 @@ import session from 'express-session'
 import bodyParse from 'body-parser'
 import methodOverride from 'method-override'
 import './passport/githubAuth.js'
-const app = express();
-//passport config is here
-app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-clearImmediate
-//config
-app.use(express.json());
-app.use(cors())
-//Db conection
-connectDB();
-//api end point
-app.use('/api/auth',authRouter)
-app.use('/api/user',userRouter);
-app.use('/api/user',exploreRouter);
-//listening app
-const PORT = 5000;
-app.listen(PORT , ()=>{
-    console.log(`server is running on :http://localhost:${PORT}`);
 
-})
+const app = express();
+
+const PORT = 5000;
+
+const startServer = async () => {
+  try {
+    await connectDB();  // ✅ Await database connection first
+
+    app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+
+    app.use(express.json());
+   // CORS Configuration
+app.use(cors({
+  origin: 'http://localhost:3000',    // frontend origin
+  credentials: true                   // allow cookies/sessions
+}));
+
+    app.use(passport.initialize()); // ✅ Don't forget to initialize passport after session
+    app.use(passport.session());
+
+    app.use('/api/auth', authRouter);
+    app.use('/api/user', userRouter);
+    app.use('/api/user', exploreRouter);
+
+    app.listen(PORT, () => {
+      console.log(`server is running on : http://localhost:${PORT}`);
+    });
+
+  } catch (error) {
+    console.error('Failed to start server:', error);
+  }
+};
+
+startServer(); // ⬅️ Start the app
+

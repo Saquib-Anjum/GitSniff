@@ -38,7 +38,7 @@ const HomePage = () => {
         // Sort repos by default (recent first)
         repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
-        console.log("User profile:", userProfile);
+        //console.log("User profile:", userProfile);
         
         setRepos(repos);
         setUserProfile(userProfile);

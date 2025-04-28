@@ -5,8 +5,10 @@ import { FaThumbsUp } from "react-icons/fa6";
 import { MdExplore } from "react-icons/md";
 import { PiSignInBold } from "react-icons/pi";
 import Logout from './Logout.jsx'
+import {useAuthContext} from '../context/authContext.jsx'
+
 const Sidebar = () => {
-  const authUser = true;
+  const {authUser} = useAuthContext();
   return (
     <div>
       <aside
