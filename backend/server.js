@@ -21,12 +21,14 @@ const startServer = async () => {
     await connectDB();  // ✅ Await database connection first
 
     app.use(session({
-      secret: 'keyboard cat',
+      name: 'connect.sid',      // Optional: session cookie name
+      secret: process.env.SESSION_SECRET || 'keyboard cat',
       resave: false,
       saveUninitialized: false,
       cookie: {
-        secure: true,         // ✅ cookie only sent over HTTPS
-        sameSite: 'none'      // ✅ allow cross-origin cookies
+        httpOnly: true,
+        secure: true,           // 🛑 IMPORTANT on Vercel (force HTTPS)
+        sameSite: 'none'        // 🛑 IMPORTANT for cross-origin frontend/backend
       }
     }));
 
