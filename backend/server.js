@@ -25,7 +25,7 @@ const startServer = async () => {
     app.use(express.json());
    // CORS Configuration
 app.use(cors({
-  origin: `${process.env.FRONTEND_BASE_URL}`,    // frontend origin
+  origin: `https://git-sniff.vercel.app`,    // frontend origin
   credentials: true                   // allow cookies/sessions
 }));
 
