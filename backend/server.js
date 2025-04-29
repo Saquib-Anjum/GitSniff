@@ -20,7 +20,15 @@ const startServer = async () => {
   try {
     await connectDB();  // ✅ Await database connection first
 
-    app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+    app.use(session({
+      secret: 'keyboard cat',
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        secure: true,         // ✅ cookie only sent over HTTPS
+        sameSite: 'none'      // ✅ allow cross-origin cookies
+      }
+    }));
 
     app.use(express.json());
    // CORS Configuration
