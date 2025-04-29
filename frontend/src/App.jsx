@@ -11,7 +11,7 @@ import {Toaster} from 'react-hot-toast'
 import {useAuthContext} from './context/authContext.jsx'
 const App = () => {
   const {authUser,loading} = useAuthContext();
-  if(loading) return null;
+  //if(loading) return null;
   console.log("authenticatedUser", authUser)
   return (
    <div className='flex text-white'>
