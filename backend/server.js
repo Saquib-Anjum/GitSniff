@@ -34,8 +34,12 @@ const startServer = async () => {
 
     app.use(express.json());
    // CORS Configuration
+   const allowedOrigins = [
+    "http://localhost:3000",
+    "https://git-sniff.vercel.app"
+  ];
 app.use(cors({
-  origin: `https://git-sniff.vercel.app`,    // frontend origin
+  origin: allowedOrigins,    // frontend origin
   credentials: true                   // allow cookies/sessions
 }));
 
