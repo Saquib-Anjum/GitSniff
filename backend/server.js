@@ -20,17 +20,7 @@ const startServer = async () => {
   try {
     await connectDB();  // ✅ Await database connection first
 
-    app.use(session({
-      name: 'connect.sid',      // Optional: session cookie name
-      secret: process.env.SESSION_SECRET || 'keyboard cat',
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        httpOnly: true,
-        secure: true,           // 🛑 IMPORTANT on Vercel (force HTTPS)
-        sameSite: 'none'        // 🛑 IMPORTANT for cross-origin frontend/backend
-      }
-    }));
+    app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
     app.use(express.json());
    // CORS Configuration
